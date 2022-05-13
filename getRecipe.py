@@ -1,9 +1,9 @@
 from asyncio.windows_events import NULL
 import requests
 from variables import apiKey
-url = f"https://api.spoonacular.com/recipes/random?apiKey={apiKey}"
 
-def getRandomRecipe():
+def getRecipe(tags=""):
+    url = f"https://api.spoonacular.com/recipes/random?tags={tags}&apiKey={apiKey}"
     response = requests.get(url)
     response = response.json()["recipes"]
     for data in response:
@@ -13,13 +13,12 @@ def getRandomRecipe():
         recipeUrl = data["spoonacularSourceUrl"]
         vegetarian = data["vegetarian"]
         vegan = data["vegan"]
-        credits = data["creditsText"]
+        image = data["image"]
 
         message = f"""
-{title} 😋 {"(Vegan Recipe)" if vegan else ""}{"(Vegetarian Recipe)" if vegetarian else ""}
+{title} 😋{" - Vegan" if vegan else ""}{" - Vegetarian" if vegetarian else ""}
 Ready in {readyInMinutes} minutes 🕒
-{servings} servings 👨‍🍳\n
-Read more about this recipe in {recipeUrl}
+{servings} servings 👨‍🍳
 
 Ingredients:
         """
@@ -28,6 +27,9 @@ Ingredients:
 🔸 {ingredient['original']}
             """
         
-        message = message+f"\nCredits to {credits}"
+        message = message+f"""
+{image}
+\nRead more about this recipe in {recipeUrl}\n
+        """
         
         return message
