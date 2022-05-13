@@ -13,16 +13,23 @@ def send_randomRecipe(message):
     chatId = message.from_user.id
     message = message.text.split()[1::] # Get the words next to the command. Those will be the tags to search the recipe
     tags = " ".join(message)
-    bot.send_message(chatId, getRecipe(tags))
+    if(getRecipe(tags) != None):
+        bot.send_message(chatId, getRecipe(tags))
+    else:
+        bot.send_message(chatId, "I couldn't find a recipe with those characteristics. Try something else 🔁")
 
-@bot.message_handler(func=lambda m: True)
+@bot.message_handler()
 def echo_all(message):
     chatId = message.from_user.id
-    if("hola" in message.text.lower()):
-        bot.send_message(chatId, "¡Hola! ¿Vamos a cocinar algo? 👩‍🍳")
-    elif("chau" in message.text.lower() or "adios" in message.text.lower()):
-        bot.send_message(chatId, "Nos vemos 👋")
+    userMsg = message.text.lower()
+
+    if("hello" in userMsg or "hi" in userMsg):
+        bot.send_message(chatId, "Hey! Let's go to cook something 👩‍🍳")
+    elif("bye" in userMsg):
+        bot.send_message(chatId, "See you 👋")
+    elif("thanks" in userMsg):
+        bot.send_message(chatId, "You're welcome 🙏")
     else:
-        bot.send_message(chatId, "Soy un bot. No te entiendo 🤖")
+        bot.send_message(chatId, "Do you want a recipe? Send the command /getRecipe 🤖")
 
 bot.infinity_polling()

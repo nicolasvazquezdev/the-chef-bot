@@ -16,7 +16,7 @@ def getRecipe(tags=""):
         image = data["image"]
 
         message = f"""
-{title} 😋{" - Vegan" if vegan else ""}{" - Vegetarian" if vegetarian else ""}
+{title} 😋{" - Vegan" if vegan else ""}{" - Vegetarian" if vegetarian and not vegan else ""}
 Ready in {readyInMinutes} minutes 🕒
 {servings} servings 👨‍🍳
 
