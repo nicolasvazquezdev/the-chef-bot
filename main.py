@@ -1,7 +1,7 @@
 import telebot
 from getRecipe import getRecipe
+from variables import token
 
-token = "5361423911:AAGMzF25f_YnRBV6egY3MyFg7mqxo-MDJVU"
 bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start', 'help'])
