@@ -1,4 +1,3 @@
-from time import sleep
 import telebot
 from getRecipe import getRecipe
 from variables import token
@@ -39,26 +38,6 @@ def send_recipe(message):
         bot.send_message(chatId, getRecipe(tags))
     else:
         bot.send_message(chatId, "I couldn't find a recipe with those characteristics. Try something else 🔁")
-
-# /setRecipe
-recipesScheduled = []
-chat_id = ""
-@bot.message_handler(commands=['setRecipe'])
-def setRecipe(message):
-    messageUser = message.text.split()[1::] # Get the words next to the command. Those will be the tags to search the recipe
-    commandMessage = " ".join(messageUser).split(" ")
-    commandTag = commandMessage[1]
-    commandSchedule = commandMessage[0]
-    newRecipe = {"schedule": commandSchedule, "tag": commandTag}
-    recipesScheduled.append(newRecipe)
-    
-# Send the recipes that were scheduled
-def sendScheduledRecipes():
-    while True == True:
-        print(recipesScheduled)
-        print("----")
-        sleep(1)
-sendScheduledRecipes()
 
 
 @bot.message_handler()
