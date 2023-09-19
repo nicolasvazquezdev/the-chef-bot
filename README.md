@@ -19,7 +19,7 @@ Get a recipe based on your preferences:
 ![Conversation with the bot](https://i.imgur.com/FZpTk1c.png)
 ## Authors
 
-- [@nicolasvazquezdev](https://github.com/nicolasvazquezdev)
+- [@nicvazquez](https://github.com/nicvazquez)
 
 
 ## Contributing
